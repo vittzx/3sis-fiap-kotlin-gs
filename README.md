@@ -1,7 +1,7 @@
 # Rm 98321, Vitor Cosso
 # RM 550186, Thiago Scaciota
 
-## Telas Funcionando
+## Telas Funcionando OBS: Desculpe a qualidade, meu printscreen não estava funcionando
 ![image](https://github.com/user-attachments/assets/7e731abc-8715-43be-a620-79d49692645c)
 ![image](https://github.com/user-attachments/assets/d5fa2c9c-051b-4493-835b-ee6db269af5e)
 ![image](https://github.com/user-attachments/assets/f8509b84-fafa-4ae9-a778-48b41e0f2d36)
