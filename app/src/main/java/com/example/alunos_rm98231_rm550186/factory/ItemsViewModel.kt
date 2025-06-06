@@ -35,15 +35,10 @@ class ItemsViewModel(application: Application) : AndroidViewModel(application) {
     }
 
 
-    fun addEvento(item: String) {
+    fun addEvento(evento: EventoModel) {
 
         viewModelScope.launch(Dispatchers.IO) {
-            val newItem = EventoModel(name = item,
-                tipoEventoExtremo = "evento",
-                grauDeImpacto = "grau",
-                dataEvento = Date.from(Instant.now()).toString()    ,
-                nmrPessoasAfetadas = 10)
-            eventoDao.insert(newItem)
+            eventoDao.insert(evento)
         }
     }
 

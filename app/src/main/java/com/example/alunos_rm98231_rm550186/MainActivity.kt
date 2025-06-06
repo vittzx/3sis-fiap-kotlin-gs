@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
+import com.example.alunos_rm98231_rm550186.entities.EventoModel
 import com.example.alunos_rm98231_rm550186.factory.EventoAdapter
 import com.example.alunos_rm98231_rm550186.factory.ItemsViewModel
 import com.example.alunos_rm98231_rm550186.factory.ItemsViewModelFactory
@@ -31,16 +32,22 @@ class MainActivity : AppCompatActivity() {
         recyclerView.adapter = eventAdapter
 
         val button = findViewById<Button>(R.id.button)
-        val nomeProduto = findViewById<EditText>(R.id.editText)
+        val nomeEvento = findViewById<EditText>(R.id.editText)
+        val grauImpacto = findViewById<EditText>(R.id.editText2)
+        val tipoImpacto = findViewById<EditText>(R.id.editText3)
+        val numeroPessoasImpactadas = findViewById<EditText>(R.id.editText4)
+
+
+
 
         button.setOnClickListener {
-            if (nomeProduto.text.isEmpty()) {
-                nomeProduto.error = "Preencha um valor"
+            if (nomeEvento.text.isEmpty()) {
+                nomeEvento.error = "Preencha um valor"
                 return@setOnClickListener
             }
 
-            viewModel.addEvento(nomeProduto.text.toString())
-            nomeProduto.text.clear()
+            viewModel.addEvento(EventoModel(name = nomeEvento.text.toString(), grauDeImpacto = grauImpacto, tipoEventoExtremo = tipoImpacto, nmrPessoasAfetadas = numeroPessoasImpactadas ))
+            nomeEvento.text.clear()
         }
 
         val viewModelFactory = ItemsViewModelFactory    (application)
