@@ -14,12 +14,12 @@ import kotlinx.coroutines.launch
 import java.time.Instant
 import java.util.Date
 
-class ItemsViewModel(application: Application) : AndroidViewModel(application) {
+class EventosViewModel(application: Application) : AndroidViewModel(application) {
 
     private val eventoDao: EventoCadastroDao
 
 
-    val itemsLiveData: LiveData<List<EventoModel>>
+    val eventosLiveData: LiveData<List<EventoModel>>
 
     init {
         val database = Room.databaseBuilder(
@@ -31,7 +31,7 @@ class ItemsViewModel(application: Application) : AndroidViewModel(application) {
             .build()
 
         eventoDao = database.eventoDao()
-        itemsLiveData = eventoDao.getAll()
+        eventosLiveData = eventoDao.getAll()
     }
 
 

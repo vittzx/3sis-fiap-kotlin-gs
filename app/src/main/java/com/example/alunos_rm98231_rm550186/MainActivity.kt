@@ -9,13 +9,14 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.example.alunos_rm98231_rm550186.entities.EventoModel
 import com.example.alunos_rm98231_rm550186.factory.EventoAdapter
-import com.example.alunos_rm98231_rm550186.factory.ItemsViewModel
-import com.example.alunos_rm98231_rm550186.factory.ItemsViewModelFactory
+import com.example.alunos_rm98231_rm550186.factory.EventoViewModelFactory
+import com.example.alunos_rm98231_rm550186.factory.EventosViewModel
+
 
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var viewModel: ItemsViewModel
+    private lateinit var viewModel: EventosViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,7 +24,7 @@ class MainActivity : AppCompatActivity() {
 
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
-        supportActionBar?.title = "Lista de Compras"
+        supportActionBar?.title = "Cadastros de Eventos Extremos"
 
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
         val eventAdapter = EventoAdapter { item ->
@@ -36,6 +37,8 @@ class MainActivity : AppCompatActivity() {
         val grauImpacto = findViewById<EditText>(R.id.editText2)
         val tipoImpacto = findViewById<EditText>(R.id.editText3)
         val numeroPessoasImpactadas = findViewById<EditText>(R.id.editText4)
+        val dataEvento = findViewById<EditText>(R.id.editText7)
+
 
 
 
@@ -46,14 +49,45 @@ class MainActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            viewModel.addEvento(EventoModel(name = nomeEvento.text.toString(), grauDeImpacto = grauImpacto, tipoEventoExtremo = tipoImpacto, nmrPessoasAfetadas = numeroPessoasImpactadas ))
+            if (grauImpacto.text.isEmpty()) {
+                grauImpacto.error = "Preencha um valor"
+                return@setOnClickListener
+            }
+
+            if (tipoImpacto.text.isEmpty()) {
+                tipoImpacto.error = "Preencha um valor"
+                return@setOnClickListener
+            }
+
+            if (numeroPessoasImpactadas.text.isEmpty() || numeroPessoasImpactadas.text.toString().toInt() < 0) {
+                numeroPessoasImpactadas.error = "Preencha um valor e acima de 0"
+                return@setOnClickListener
+            }
+            if (dataEvento.text.isEmpty()) {
+                dataEvento.error = "Preencha um valor"
+                return@setOnClickListener
+            }
+
             nomeEvento.text.clear()
+            nomeEvento.text.clear()
+            nomeEvento.text.clear()
+            nomeEvento.text.clear()
+            nomeEvento.text.clear()
+
+
+
+            viewModel.addEvento(EventoModel(
+                name = nomeEvento.text.toString(),
+                grauDeImpacto = grauImpacto.text.toString(),
+                tipoEventoExtremo = tipoImpacto.text.toString(),
+                nmrPessoasAfetadas = numeroPessoasImpactadas.text.toString().toInt(),
+                dataEvento = dataEvento.text.toString()))
         }
 
-        val viewModelFactory = ItemsViewModelFactory    (application)
-        viewModel = ViewModelProvider(this, viewModelFactory).get(ItemsViewModel::class.java)
+        val viewModelFactory = EventoViewModelFactory    (application)
+        viewModel = ViewModelProvider(this, viewModelFactory).get(EventosViewModel::class.java)
 
-        viewModel.itemsLiveData.observe(this) { items ->
+        viewModel.eventosLiveData.observe(this) { items ->
             eventAdapter.updateEvents(items)
         }
     }
