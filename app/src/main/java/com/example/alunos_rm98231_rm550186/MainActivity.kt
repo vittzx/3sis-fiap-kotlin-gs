@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
-import com.example.alunos_rm98231_rm550186.factory.ItemsAdapter
+import com.example.alunos_rm98231_rm550186.factory.EventoAdapter
 import com.example.alunos_rm98231_rm550186.factory.ItemsViewModel
 import com.example.alunos_rm98231_rm550186.factory.ItemsViewModelFactory
 
@@ -15,7 +15,6 @@ import com.example.alunos_rm98231_rm550186.factory.ItemsViewModelFactory
 class MainActivity : AppCompatActivity() {
 
     private lateinit var viewModel: ItemsViewModel
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,29 +25,29 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.title = "Lista de Compras"
 
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
-        val itemsAdapter = ItemsAdapter { item ->
+        val eventAdapter = EventoAdapter { item ->
             viewModel.removeItem(item)
         }
-        recyclerView.adapter = itemsAdapter
+        recyclerView.adapter = eventAdapter
 
         val button = findViewById<Button>(R.id.button)
-        val editText = findViewById<EditText>(R.id.editText)
+        val nomeProduto = findViewById<EditText>(R.id.editText)
 
         button.setOnClickListener {
-            if (editText.text.isEmpty()) {
-                editText.error = "Preencha um valor"
+            if (nomeProduto.text.isEmpty()) {
+                nomeProduto.error = "Preencha um valor"
                 return@setOnClickListener
             }
 
-            viewModel.addItem(editText.text.toString())
-            editText.text.clear()
+            viewModel.addEvento(nomeProduto.text.toString())
+            nomeProduto.text.clear()
         }
 
         val viewModelFactory = ItemsViewModelFactory    (application)
         viewModel = ViewModelProvider(this, viewModelFactory).get(ItemsViewModel::class.java)
 
         viewModel.itemsLiveData.observe(this) { items ->
-            itemsAdapter.updateItems(items)
+            eventAdapter.updateEvents(items)
         }
     }
 }

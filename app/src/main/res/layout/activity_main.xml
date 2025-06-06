@@ -26,6 +26,32 @@
         android:hint="Nome do produto"
         android:inputType="text"/>
 
+    <EditText
+        android:id="@+id/editText2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:hint="Grau Impacto"
+        android:inputType="text"/>
+
+    <EditText
+        android:id="@+id/editText3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:hint="Tipo Impacto"
+        android:inputType="text"/>
+
+    <EditText
+        android:id="@+id/editText4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:hint="Numero de pessoas impactadas"
+        android:inputType="number"/>
     <Button
         android:id="@+id/button"
         android:layout_width="match_parent"
